@@ -32,19 +32,14 @@ sections.forEach((item) => {
 
 let scrollY = window.scrollY;
 
-
-
 window.addEventListener("scroll", () => {
-let scrollY = window.scrollY;
+  let scrollY = window.scrollY;
 
   let bora3 = document.getElementById("bora3");
   let bora4 = document.getElementById("bora4");
   let dark = document.getElementById("darklight");
   let gallery = document.querySelector(".horizontal-scroll-wrapper");
   const imageAll = document.querySelectorAll(".finalImage");
-
-
-  console.log(scrollY);
 
   if (scrollY > 730) {
     sections[0].style.backgroundColor = "rgb(0, 0, 0)";
@@ -71,14 +66,12 @@ let scrollY = window.scrollY;
     sections[8].style.display = "none";
     sections[9].style.display = "none";
     scrolls[0].style.display = "none";
-    scrolls[1].style.display = "none"; 
+    scrolls[1].style.display = "none";
   } else {
-    console.log("cont.scrollTop");
     sections[3].style.display = "block";
     sections[4].style.display = "block";
     sections[5].style.display = "block";
     scrolls[0].style.display = "block";
-
   }
 
   if (scrollY > 2800 && scrollY < 3600) {
@@ -87,7 +80,7 @@ let scrollY = window.scrollY;
     bora3.style.opacity = 0;
     bora4.style.opacity = 1;
   }
-  
+
   if (scrollY > 3350) {
     bora3.style.transform = "rotate(-90deg)";
     bora4.style.display = "block";
@@ -108,12 +101,12 @@ let scrollY = window.scrollY;
     bora4.style.display = "none";
   }
 
-  if (scrollY > 4700 && scrollY < 6600) {
+  if (scrollY > 4700 && scrollY < 6550) {
     sections[5].style.position = "fixed";
     sections[6].style.display = "block";
   }
 
-  if (scrollY > 6600 && scrollY < 7267) {
+  if (scrollY > 6550 && scrollY < 7300) {
     sections[6].style.opacity = 1;
     mouseMove();
   }
@@ -122,27 +115,27 @@ let scrollY = window.scrollY;
     sections[6].style.display = "block";
   }
 
-  if (scrollY > 8800) {
-    const progress = (scrollY - 8800) / (9200 - 8800); // 스크롤 범위 내의 진행 상태 계산 (0 ~ 1)
-    const backgroundColor = `rgb(${255 * progress}, ${255 * progress}, ${255 * progress})`; // 진행 상태에 따라 흰색으로 전환
+  if (scrollY > 7300) {
+    const progress = (scrollY - 7300) / (8300 - 7300);
+    const backgroundColor = `rgb(${255 * progress}, ${255 * progress}, ${
+      255 * progress
+    })`;
     sections[7].style.backgroundColor = backgroundColor;
-    sections[7].style.transition = "background-color 0.2s ease"; // 효과 추가
-
+    sections[7].style.transition = "background-color 0.2s ease";
+    scrollfinal();
   } else {
     sections[7].style.backgroundColor = "rgb(0,0,0)";
   }
 
-  if (scrollY > 9200) {
+  if (scrollY > 8300) {
     sections[5].style.opacity = 0;
     sections[8].style.display = "block";
+
     setTimeout(() => {
       sections[8].style.opacity = 1;
       scrolls[1].style.display = "block";
       sections[9].style.display = "block";
-    }, 500);
-    
-    scrollfinal();
-
+    }, 1000);
   } else {
     sections[5].style.opacity = 1;
     sections[8].style.display = "none";
@@ -153,18 +146,16 @@ let cont = document.querySelector(".container");
 let layers = document.querySelectorAll(".layer");
 let scrolls = document.querySelectorAll(".scroll");
 
-
 cont.onscroll = () => {
   let x = cont.scrollTop;
 
   while (cont.scrollTop >= 1600) {
-    console.log("cont.scrollTop!!");
     sections[3].style.display = "block";
     sections[4].style.display = "block";
     sections[5].style.display = "block";
     sections[6].style.display = "block";
     scrolls[0].style.display = "block";
-    break; // 반복문 종료
+    break;
   }
 
   layers[0].style.left = x / 1 + "px";
@@ -178,10 +169,10 @@ cont.onscroll = () => {
 
 document.addEventListener("scroll", () => {
   const scrollPosition = window.scrollY - 4000;
-  const scrollThreshold = window.innerHeight * 2; // 200vh에 해당하는 값
+  const scrollThreshold = window.innerHeight * 2;
 
   let scrollProgress = (scrollPosition / scrollThreshold) * 100;
-  scrollProgress = Math.max(scrollProgress - 10, 0); // 시작 값으로부터 -30% 조정
+  scrollProgress = Math.max(scrollProgress - 10, 0);
 
   const circleSize = `${scrollProgress}%`;
   sections[5].style.clipPath = `circle(${circleSize} at left bottom)`;
@@ -191,8 +182,6 @@ function mouseMove() {
   let x = 0;
   let targetX = 0;
   const speed = 0.1;
-
-
 
   window.addEventListener("mousemove", (e) => {
     x = e.pageX - window.innerWidth / 2;
@@ -214,7 +203,7 @@ function mouseMove() {
       clickPlant.style.opacity = 1;
       plant.style.pointerEvents = "auto";
       plant.style.cursor = "pointer";
-      plant.style.animation = "blink 1.5s infinite ease-in-out"; // blink 애니메이션 적용
+      plant.style.animation = "blink 1.5s infinite ease-in-out";
       plant.addEventListener("click", () => {
         sections[7].style.display = "block";
         sections[7].scrollIntoView({ behavior: "smooth" });
@@ -261,32 +250,26 @@ function scrollfinal() {
   const totalNum = imageAll.length;
   const finalBubble = document.querySelectorAll(".final-bubble");
 
-  window.addEventListener("scroll", () => {
-    const scrollNum = window.scrollY - 9000;
+  const scrollNum = window.scrollY - 8300;
 
-    if (scrollNum > 0) {
-      imageAll.forEach((item, index) => {
-        const translateZValue = Math.max(
-          0,
-          500 - scrollNum / (2 * (totalNum - index))
-        );
-        item.style.transform = `perspective(400px) translate3d(0, 0, ${translateZValue}px)`;
-      });
-      console.log(scrollNum);
-    }
-    if (scrollNum > 2300) {
-      finalBubble[1].style.opacity = 1;
-    } else {
-      finalBubble[1].style.opacity = 0;
-    }
-  });
+  if (scrollNum > 0) {
+    imageAll.forEach((item, index) => {
+      const translateZValue = Math.max(
+        0,
+        500 - scrollNum / (2 * (totalNum - index))
+      );
+      item.style.transform = `perspective(400px) translate3d(0, 0, ${translateZValue}px)`;
+    });
+    console.log(scrollNum);
+  }
+  if (scrollNum > 2300) {
+    finalBubble[1].style.opacity = 1;
+  } else {
+    finalBubble[1].style.opacity = 0;
+  }
 }
 
-// 버튼 클릭 시 이벤트 리스너 추가
-document.getElementById('resetButton').addEventListener('click', function() {
-  // 페이지 맨 위로 스크롤 이동
+document.getElementById("resetButton").addEventListener("click", function () {
   window.scrollTo(0, 0);
-  
-  // 페이지 새로고침
   location.reload();
 });
